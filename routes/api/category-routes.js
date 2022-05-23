@@ -9,19 +9,17 @@ router.get('/', async (req, res) => {
   // find all categories
   try {
     const categoryData = await Category.findAll( {
-
+//includes product model as part of the json file
       include: { model: Product}
      });
     res.status(200).json(categoryData);
   } catch (err) {
     res.status(500).json(err);
   }
-  // be sure to include its associated Products
 });
 
 router.get('/:id', async (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
+//try catch error to grab the id in the parameters and pass through the correct category
   try {
     const categoryData = await Category.findByPk(req.params.id, {
       // JOIN with locations, using the Trip through table
@@ -84,7 +82,7 @@ router.delete('/:id', async (req, res) => {
       res.status(404).json({ message: 'No category found with this id!' });
       return;
     }
-
+//message to return if deleteCategory was true or false
     res.status(200).json(deleteCategory? "Deleted Sucessfully":"No success");;
   } catch (err) {
     res.status(500).json(err)
