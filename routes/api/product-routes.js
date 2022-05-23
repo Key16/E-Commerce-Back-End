@@ -6,8 +6,8 @@ const { sequelize } = require('../../models/Product');
 
 // get all products
 router.get('/', async (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
+  // find all products including their category and tag in json
+ 
   try {
 
     const productData = await Product.findAll( {
@@ -22,8 +22,7 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', async (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+
   try {
     const getProductById = await Product.findByPk(req.params.id, {
 
@@ -125,7 +124,7 @@ router.delete('/:id', async (req, res) => {
       res.status(404).json({ message: 'No Product found with this id!' });
       return;
     }
-
+//returns a message if deleted succesfully or not
     res.status(200).json(productData? "Deleted Sucessfully":"No success");
   } catch (err) {
     res.status(500).json(err);

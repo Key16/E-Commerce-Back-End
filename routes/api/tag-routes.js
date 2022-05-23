@@ -5,7 +5,6 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 router.get('/', async (req, res) => {
   // find all tags
-  // be sure to include its associated Product data
   try {
     const TagData = await Tag.findAll( {
 
@@ -19,7 +18,6 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
-  // be sure to include its associated Product data
   try {
     const getTagById = await Tag.findByPk(req.params.id, {
       // JOIN with locations, using the Trip through table
@@ -46,8 +44,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+//updating tag
 router.put('/:id', async (req, res) => {
-  // update a tag's name by its `id` value
   try {
     const tagData = await Tag.findByPk(req.params.id);
 
@@ -70,8 +68,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+//deleting tag
 router.delete('/:id', async (req, res) => {
-  // delete on tag by its `id` value
   try {
     const deleteTag = await Tag.destroy({
       where: {
